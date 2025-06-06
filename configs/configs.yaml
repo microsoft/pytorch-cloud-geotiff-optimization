@@ -1,0 +1,20 @@
+default:
+  num_workers: 4
+  num_threads: 1
+  prefetch_factor: 2
+  sampler_type: random
+  patch_size: 256
+
+local-optimal:
+  num_workers: 4
+  num_threads: 1
+  prefetch_factor: 2
+  sampler_type: block
+  patch_size: 256
+
+remote-optimal:
+  num_workers: 64
+  num_threads: 1
+  prefetch_factor: 8
+  sampler_type: block
+  patch_size: 256

@@ -1,0 +1,18 @@
+vaihingen:
+  local-default: "" # LOCAL DEFAULT PATH
+  local-optimal: "" # LOCAL OPTIMAL PATH
+  remote-default: "" # REMOTE DEFAULT URL
+  remote-optimal: "" # REMOTE OPTIMAL URL
+  classes: 6
+potsdam:
+  local-default: "" # LOCAL DEFAULT PATH
+  local-optimal: "" # LOCAL OPTIMAL PATH
+  remote-default: "" # REMOTE DEFAULT URL
+  remote-optimal: "" # REMOTE OPTIMAL URL
+  classes: 6
+dfc-22:
+  local-default: "" # LOCAL DEFAULT PATH
+  local-optimal: "" # LOCAL OPTIMAL PATH
+  remote-default: "" # REMOTE DEFAULT URL
+  remote-optimal: "" # REMOTE OPTIMAL URL
+  classes: 15

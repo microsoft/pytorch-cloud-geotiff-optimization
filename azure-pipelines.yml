@@ -1,0 +1,50 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+# See more on PIP component governance here:
+# https://github.com/microsoft/component-detection/blob/main/docs/detectors/pip.md
+
+trigger:  
+- master  
+
+pool:
+  name: 'AI4GLPool-win2022'
+
+variables:
+  # Enable PIP Component Governance (requirements.txt)
+  PipReportOverrideBehavior: 'SourceCodeScan'
+
+steps:
+
+- task: VulnerabilityAssessment@0
+
+- task: CredScan@3
+  inputs:  
+    verboseOutput: true
+
+- task: PoliCheck@2
+  inputs:
+    targetType: 'F'
+    targetArgument: '$(Build.SourcesDirectory)'
+    result: 'PoliCheck.xml'
+
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.9'
+    addToPath: true
+
+- task: ComponentGovernanceComponentDetection@0
+  inputs:
+    scanType: 'Register'
+    useDefaultDetectors: true
+    verbosity: 'Verbose'
+    alertWarningLevel: 'High'
+
+- task: PublishSecurityAnalysisLogs@3
+  inputs:  
+    ArtifactName: 'CodeAnalysisLogs'  
+    ArtifactType: 'Container'  
+    AllTools: true  
+    ToolLogsNotFoundAction: 'Standard'
