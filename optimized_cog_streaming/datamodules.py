@@ -62,7 +62,7 @@ def get_image_sizes(uris):
     block_size = None
     dtype = None
     bad_files = list()
-    for uri in uris:
+    for index, uri in enumerate(uris):
         try:
             with rasterio.open(uri) as src:
                 sizes.append(src.shape)
@@ -80,7 +80,8 @@ def get_image_sizes(uris):
                             f"Warning: Inconsistent block sizes detected. Using the first one: {block_size}"
                         )
         except Exception as e:
-            print(f"Error opening {uri}: {e}")
+            # URIs and exception messages may contain SAS credentials.
+            print(f"Error opening image at index {index}: {type(e).__name__}")
             bad_files.append(uri)
 
     return sizes, block_size, dtype, bad_files
